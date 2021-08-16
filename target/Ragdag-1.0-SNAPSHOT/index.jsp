@@ -13,13 +13,14 @@
         <input type="text" placeholder="Enter Username" name="username" required />
         <label>Password : </label>
         <input type="password" placeholder="Enter Password" name="password" required />
-        <button type="submit" value="RUN">Login</button>
+        <button type="submit" name="login" value="OK">Login</button>
     </div>
+</form>
 
-
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
-<a href="login">Login Servlet</a>
+<p>Don't have an account yet?</p>
+<form action="Register.jsp">
+    <button type="submit" name="register" value="OK">Register</button>
+</form>
 
 </body>
 </html>
