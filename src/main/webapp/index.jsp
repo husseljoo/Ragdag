@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Login</title>
 </head>
 <body>
-<h1><%= "Hello World!" %></h1>
+<h2><%= "Welcome to the Car Dealership" %></h2>
 
-<form action="login" method="post">
+<form action="LoginServlet" method="post">
     <div class="container">
         <label>Username : </label>
         <input type="text" placeholder="Enter Username" name="username" required />

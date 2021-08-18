@@ -14,36 +14,56 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().println("This is inside the post method");
 
+        String firstName = request.getParameter("first");
+        String lastName = request.getParameter("last");
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String retypePassword = request.getParameter("password2");
-        String firstName = request.getParameter("first");
-        String lastName = request.getParameter("last");
+        String role = request.getParameter("role");
+
+        if (role.equals("emp")) {
+            response.getWriter().println("The guy is an employee");
+        } else if (role.equals("man")) {
+            response.getWriter().println("The guy is a manager");
+        }
 
 
-        response.getWriter().println("First Name is"+firstName);
-        response.getWriter().println("Last Name is"+lastName);
-        response.getWriter().println("Username is "+username);
-        response.getWriter().println("Email is "+email);
-        response.getWriter().println("Password is "+password);
-        response.getWriter().println("Retyped password is "+retypePassword);
+
 
         try {
             Connection con = DatabaseConnection.initializeDatabase();
 
-            Statement stmt=con.createStatement();
-            ResultSet rs=stmt.executeQuery("SELECT * FROM Users");
-            while(rs.next())
-                response.getWriter().println(rs.getInt(0)+"  "+rs.getString(1)+"  "+rs.getString(2));
 
-            rs.close();
+            String query = "INSERT INTO Users (first_name, last_name, username, email, password, role) VALUES (?,?,?,?,?,?)";
+
+            // create the mysql insert preparedstatement
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString (1,firstName);
+            preparedStmt.setString (2,lastName);
+            preparedStmt.setString (3,username);
+            preparedStmt.setString (4,email);
+            preparedStmt.setString (5,password);
+            preparedStmt.setString (6,role);
+
+            // execute the preparedstatement
+            preparedStmt.execute();
             con.close();
+
+            response.sendRedirect(request.getContextPath()+"/index.jsp");
+        } catch(SQLIntegrityConstraintViolationException e){
+           //username already exists in database not unique
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//        response.getWriter().println("First Name is"+firstName);
+//        response.getWriter().println("Last Name is"+lastName);
+//        response.getWriter().println("Username is "+username);
+//        response.getWriter().println("Email is "+email);
+//        response.getWriter().println("Password is "+password);
+//        response.getWriter().println("Retyped password is "+retypePassword);
 
     }
 }
