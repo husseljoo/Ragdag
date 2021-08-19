@@ -12,20 +12,16 @@
     <title>Login</title>
 </head>
 <body>
-<%--<h2 id="firstName"><%= "Welcome to the Car Dealership" %></h2>--%>
-<h2 id="firstName">Welcome to the Car Dealership</h2>
-document.getElementById("message").innerHTML = "password do not match";
 
-<form action="LoginServlet" method="post">
-    <div class="container">
-        <label>Username : </label>
-        <input type="text" placeholder="Enter Username" name="username" required />
-        <label>Password : </label>
-        <input type="password" placeholder="Enter Password" name="password" required />
-        <button type="submit" name="login" value="OK">Login</button>
-    </div>
+<h2>Welcome <%= session.getAttribute("first_name") %></h2>
+<h2>Role is <%= session.getAttribute("role") %></h2>
+<h2>Id is <%= session.getAttribute("id") %></h2>
+
+<div> This is supposed to be the Home page </div>
+
+<form action="CarsServlet" method="get">
+    <button type="submit" name="cars" value="OK">view cars</button>
 </form>
-
 
 </body>
 </html>

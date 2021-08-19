@@ -1,4 +1,6 @@
-package com.example.ragdag;
+package Helpers;
+
+import Helpers.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

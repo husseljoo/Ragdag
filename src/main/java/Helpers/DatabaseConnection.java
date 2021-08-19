@@ -1,4 +1,4 @@
-package com.example.ragdag;
+package Helpers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 // This class can be used to initialize the database connection
 public class DatabaseConnection {
-    protected static Connection initializeDatabase()
+    public static Connection initializeDatabase() //change public to protected
             throws SQLException, ClassNotFoundException
     {
         // Initialize all the information regarding

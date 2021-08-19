@@ -1,10 +1,16 @@
 package com.example.ragdag;
 
+import Helpers.DatabaseConnection;
+import Helpers.QueryProcessor;
+import Helpers.QueryType;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
@@ -29,41 +35,33 @@ public class RegisterServlet extends HttpServlet {
             response.getWriter().println("The guy is a manager");
         }
 
-
-
+        Connection connection = null;
 
         try {
-            Connection con = DatabaseConnection.initializeDatabase();
-
-
-            String query = "INSERT INTO Users (first_name, last_name, username, email, password, role) VALUES (?,?,?,?,?,?)";
-
-            // create the mysql insert preparedstatement
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString (1,firstName);
-            preparedStmt.setString (2,lastName);
-            preparedStmt.setString (3,username);
-            preparedStmt.setString (4,email);
-            preparedStmt.setString (5,password);
-            preparedStmt.setString (6,role);
-
-            // execute the preparedstatement
-            preparedStmt.execute();
-            con.close();
-
-            response.sendRedirect(request.getContextPath()+"/index.jsp");
-        } catch(SQLIntegrityConstraintViolationException e){
-           //username already exists in database not unique
-        } catch (Exception e) {
+            connection = DatabaseConnection.initializeDatabase();
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
 
-//        response.getWriter().println("First Name is"+firstName);
-//        response.getWriter().println("Last Name is"+lastName);
-//        response.getWriter().println("Username is "+username);
-//        response.getWriter().println("Email is "+email);
-//        response.getWriter().println("Password is "+password);
-//        response.getWriter().println("Retyped password is "+retypePassword);
+        String query = "INSERT INTO Users (first_name, last_name, username, email, password, role) VALUES (?,?,?,?,?,?)";
+        List<String> parameters = new ArrayList<String>();
+        parameters.add(firstName);
+        parameters.add(lastName);
+        parameters.add(username);
+        parameters.add(email);
+        parameters.add(password);
+        parameters.add(role);
 
+        QueryType queryType = QueryType.INSERT;
+
+        QueryProcessor queryProcessor = new QueryProcessor(connection, query, parameters, queryType);
+        ResultSet resultSet = queryProcessor.execute();
+
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        response.sendRedirect("index.jsp");
     }
 }
