@@ -16,17 +16,8 @@
     function validateForm() {
         var pw = document.getElementById("psswd").value;
         var rpw = document.getElementById("rpsswd").value;
-        var first = document.getElementsById("first").value;
-        var last = document.getElementsById("last").value;
-        var role = document.getElementsByName("role").value;
-        var username = document.getElementsById("username").value;
-        var email = document.getElementsById("email").value;
 
-        if(pw==null || rpw==null || first==null || last==null || username==null || email==null){
-            document.getElementById("message").innerHTML = "do not leave empty cells";
-            return false;
-        }
-        if (pw != rpw) {
+        if(pw != rpw){
             document.getElementById("message").innerHTML = "passwords do not match";
             return false;
         }
@@ -40,10 +31,10 @@
     <div id="login-box">
         <div class="left">
             <h1>Register</h1>
-            <input type="text" name="username" placeholder="Username" id="username"/>
-            <input type="text" name="email" placeholder="E-mail" id="email"/>
-            <input type="password" name="password" placeholder="Password" id="psswd"/>
-            <input type="password" name="password2" placeholder="Retype password" id="rpsswd"/>
+            <input type="text" name="username" placeholder="Username" id="username" required>
+            <input type="email" name="email" placeholder="E-mail" id="email" required>
+            <input type="password" name="password" placeholder="Password" id="psswd" required>
+            <input type="password" name="password2" placeholder="Retype password" id="rpsswd" required>
             <input type="submit" name="signup_submit" value="Sign me up" />
         </div>
         <div class="right">
@@ -52,10 +43,10 @@
             <input type="text" name="last" placeholder="Last Name" id="last"/>
 
             <label for="R1">Employee</label>
-            <input type="Radio" name="role" id="R1" value="emp" >
+            <input type="Radio" name="role" id="R1" value="emp" required>
 
-            <label for="R2">Manager</label>
-            <input type="Radio" name="role" id="R2" value="man" >
+            <label for="R2" required>Manager</label>
+            <input type="Radio" name="role" id="R2" value="man" required>
 
 
             <div>

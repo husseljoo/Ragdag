@@ -59,8 +59,14 @@
                 </form>
             </td>
             <td>
-                <form action="EditServlet" method="post">
+                <form action="EditCar.jsp" method="post">
                     <input type="hidden" name="edit_car" value="<%= car.getId() %>" />
+                    <input type="hidden" name="brand" value="<%= car.getBrand() %>" />
+                    <input type="hidden" name="model" value="<%= car.getModel() %>" />
+                    <input type="hidden" name="year" value="<%= car.getYear() %>" />
+                    <input type="hidden" name="color" value="<%= car.getColor() %>" />
+                    <input type="hidden" name="country" value="<%= car.getCountry() %>" />
+
                     <input type="submit" value="Edit" name="remove">
                 </form>
             </td>

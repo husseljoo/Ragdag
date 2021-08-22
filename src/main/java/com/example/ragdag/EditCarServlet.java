@@ -9,14 +9,12 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "RemoveServlet", value = "/RemoveServlet")
-public class RemoveServlet extends HttpServlet {
+@WebServlet(name = "EditCarServlet", value = "/EditCarServlet")
+public class EditCarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -24,42 +22,66 @@ public class RemoveServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String remove = request.getParameter("remove_car");
-        String edit = request.getParameter("edit_car");
-        String carId = null;
 
-        if(remove==null && edit==null) {
-           return;
-        } else if(remove==null && edit!=null) {
-            carId = edit;
-        } else if(remove!=null && edit==null) {
-            carId = remove;
-        }
+        String brand = request.getParameter("brand");
+        String model = request.getParameter("model");
+        String year = request.getParameter("year");
+        String color = request.getParameter("color");
+        String country = request.getParameter("country");
 
         Connection connection = null;
+
         try {
             connection = DatabaseConnection.initializeDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
 
-        String query = "DELETE FROM Cars WHERE id=?";
+        System.out.println("UPDATE Cars SET brand=?, model=?, year=?, color=?, country=? WHERE id=?");
+        System.out.println("the supposed id of the car is: " + request.getParameter("edit_car"));
+        String query = "UPDATE Cars SET brand=?, model=?, year=?, color=?, country=? WHERE id=?";
         List<String> parameters = new ArrayList<String>();
-        parameters.add(carId);
-        QueryType queryType = QueryType.DELETE;
+        parameters.add(brand);
+        parameters.add(model);
+        parameters.add(year);
+        parameters.add(color);
+        parameters.add(country);
+        parameters.add(request.getParameter("edit_car"));
+        QueryType queryType = QueryType.UPDATE;
 
         QueryProcessor queryProcessor = new QueryProcessor(connection, query, parameters, queryType);
         queryProcessor.execute();
-        System.out.println("The car with id " + carId + " has been deleted");
 
         try {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         response.sendRedirect("CarsServlet");
     }
-}
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

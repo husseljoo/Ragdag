@@ -21,13 +21,13 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String firstName = request.getParameter("first");
-        String lastName = request.getParameter("last");
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String retypePassword = request.getParameter("password2");
-        String role = request.getParameter("role");
+        String firstName = request.getParameter("first").trim();
+        String lastName = request.getParameter("last").trim();
+        String username = request.getParameter("username").trim();
+        String email = request.getParameter("email").trim();
+        String password = request.getParameter("password").trim();
+        String retypePassword = request.getParameter("password2").trim();
+        String role = request.getParameter("role").trim();
 
         if (role.equals("emp")) {
             response.getWriter().println("The guy is an employee");

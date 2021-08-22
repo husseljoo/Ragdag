@@ -20,6 +20,8 @@ import java.util.List;
 public class CarsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
 
         Connection connection = null;
         try {
@@ -55,7 +57,10 @@ public class CarsServlet extends HttpServlet {
         }
 
         request.setAttribute("cars_list", carsList);
-        request.getRequestDispatcher("Cars.jsp").forward(request, response);
+        if(role.equals("emp"))
+            request.getRequestDispatcher("CarsEmp.jsp").forward(request, response);
+        else if(role.equals("man"))
+            request.getRequestDispatcher("CarsManager.jsp").forward(request, response);
     }
 
     @Override
