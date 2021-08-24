@@ -22,6 +22,9 @@
 <form action="CarsServlet" method="get">
     <button type="submit" name="cars" value="OK">view cars</button>
 </form>
+<form action="index.jsp" method="get">
+    <input type="submit" value="Back to login" name="back">
+</form>
 
 </body>
 </html>

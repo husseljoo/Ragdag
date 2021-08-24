@@ -17,12 +17,21 @@
 <head>
     <title>Car Page</title>
 </head>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
 <body>
 
 <h3> This is the list of all the cars: </h3>
 
-<form action="AddCar.jsp" method="post">
-    <input type="submit" value="Add" name="remove">
+<form action="Home.jsp" method="get">
+    <input type="submit" value="Home" name="home">
+</form>
+<form action="AddCar.jsp" method="get">
+    <input type="submit" value="Add" name="add">
 </form>
 
 <table cellspacing="4" cellpadding="4">

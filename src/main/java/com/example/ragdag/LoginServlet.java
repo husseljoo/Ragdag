@@ -52,17 +52,19 @@ public class LoginServlet extends HttpServlet {
             firstName = resultSet.getString("first_name");
             System.out.println("The retrieved value from ResultSet is: " + idVal);
             connection.close();
+
+            HttpSession session = request.getSession();
+            session.setAttribute("id", idVal);
+            session.setAttribute("role", role);
+            session.setAttribute("first_name", firstName);
+            response.sendRedirect("Home.jsp");
+            return;
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("username and password combination does not exist");
+            response.sendRedirect("index.jsp");
             return;
         }
 
-        HttpSession session = request.getSession();
-        session.setAttribute("id", idVal);
-        session.setAttribute("role", role);
-        session.setAttribute("first_name", firstName);
-
-        response.sendRedirect("Home.jsp");
     }
 }

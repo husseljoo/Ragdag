@@ -18,9 +18,21 @@
 <head>
   <title>Car Page</title>
 </head>
+
+<style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+</style>
+
 <body>
 
 <h3> This is the list of all the cars: </h3>
+
+<form action="Home.jsp" method="get">
+  <input type="submit" value="Home" name="home">
+</form>
 
 <table cellspacing="4" cellpadding="4">
   <tr>
