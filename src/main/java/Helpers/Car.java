@@ -7,14 +7,16 @@ public class Car {
     int year;
     String color;
     String country;
+    String countryCode;
 
-    public Car(int id, String brand, String model, int year, String color, String country) {
+    public Car(int id, String brand, String model, int year, String color, String country, String countryCode) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.year = year;
         this.color = color;
         this.country = country;
+        this.countryCode = countryCode;
     }
     public String toString() {
         return "Id= " +this.id+ ", Brand= " +this.brand+ ", Model= " +this.model+ ", Year= " +this.year+ ", Color= " +this.color+ ", Country= " +this.country;
@@ -66,6 +68,13 @@ public class Car {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     }

@@ -23,6 +23,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
+        System.out.println("Language: "+request.getLocale().getLanguage());
+        System.out.println("Language: "+request.getLocales());
 
         Connection connection = null;
         try {

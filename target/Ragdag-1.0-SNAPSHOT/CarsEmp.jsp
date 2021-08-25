@@ -55,12 +55,12 @@
                     Car car = iterator.next();
         %>
         <tr>
-            <td><%=car.getId()%></td>
-            <td><%=car.getBrand()%></td>
-            <td><%=car.getModel()%></td>
-            <td><%=car.getYear()%></td>
-            <td><%=car.getColor()%></td>
-            <td><%=car.getCountry()%></td>
+            <td name="id" value="<%=car.getId()%>"><a href="ViewCarServlet"> <%=car.getId()%> </a></td>
+            <td name="brand" value="<%=car.getBrand()%>"><a href="ViewCarServlet"> <%=car.getBrand()%> </a></td>
+            <td name="model" value="<%=car.getModel()%>"><%=car.getModel()%></td>
+            <td name="year" value="<%=car.getYear()%>"><%=car.getYear()%></td>
+            <td name="color" value="<%=car.getColor()%>"><%=car.getColor()%></td>
+            <td name="country" value="<%=car.getCountry()%>"><%=car.getCountry()%></td>
             <td>
                 <form action="RemoveServlet" method="post">
                     <input type="hidden" name="remove_car" value="<%= car.getId() %>" />
@@ -70,14 +70,27 @@
             <td>
                 <form action="EditCar.jsp" method="post">
                     <input type="hidden" name="edit_car" value="<%= car.getId() %>" />
-                    <input type="hidden" name="brand" value="<%= car.getBrand() %>" />
+                    <input type="hidden" name="brand" value="<%= car.getBrand() %>" href="CarDetails.jsp"/>
+                    <input type="hidden" name="model" value="<%= car.getModel() %>" />
+                    <input type="hidden" name="year" value="<%= car.getYear() %>" />
+                    <input type="hidden" name="color" value="<%= car.getColor() %>" />
+                    <input type="hidden" name="country" value="<%= car.getCountry() %>" />
+                    <input type="hidden" name="countryCode" value="<%= car.getCountryCode() %>" />
+
+                    <input type="submit" value="Edit" name="remove">
+                </form>
+            <td>
+                <form action="ViewCarServlet" method="post">
+                    <input type="hidden" name="details" value="<%= car.getId() %>" />
+                    <input type="hidden" name="brand" value="<%= car.getBrand() %>" href="CarDetails.jsp"/>
                     <input type="hidden" name="model" value="<%= car.getModel() %>" />
                     <input type="hidden" name="year" value="<%= car.getYear() %>" />
                     <input type="hidden" name="color" value="<%= car.getColor() %>" />
                     <input type="hidden" name="country" value="<%= car.getCountry() %>" />
 
-                    <input type="submit" value="Edit" name="remove">
+                    <input type="submit" value="View Details" name="details">
                 </form>
+            </td>
             </td>
         <%
                 }

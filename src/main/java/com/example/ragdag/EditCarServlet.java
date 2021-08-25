@@ -62,26 +62,3 @@ public class EditCarServlet extends HttpServlet {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

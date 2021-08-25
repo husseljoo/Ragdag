@@ -1,4 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="Helpers.DatabaseConnection" %>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="Helpers.QueryProcessor" %>
+<%@ page import="Helpers.QueryType" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.ResultSet" %>
 <html>
 <head>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -8,6 +15,22 @@
         <title>Add Car</title>
     </head>
 <body>
+<%
+    Connection connection = null;
+    try {
+        connection = DatabaseConnection.initializeDatabase();
+    } catch (Exception e) {
+        e.printStackTrace();
+        return;
+    }
+
+    String query = "SELECT * FROM Country";
+    List<String> parameters = new ArrayList<String>();
+    QueryType queryType = QueryType.SELECT;
+
+    QueryProcessor queryProcessor = new QueryProcessor(connection, query, parameters, queryType);
+    ResultSet resultSet = queryProcessor.execute();
+%>
 
 <form action="EditCarServlet" method="post">
     <div id="login-box">
@@ -17,12 +40,28 @@
             <input value="<%= request.getParameter("brand") %>" type="text" name="brand" placeholder="Brand" id="brand" required>
             <input value="<%= request.getParameter("model") %>" type="text" name="model" placeholder="Model" id="model" required>
             <input value="<%= request.getParameter("year") %>" type="text" name="year" placeholder="Year" id="year" required>
-            <input value="<%= request.getParameter("country") %>" type="text" name="country" placeholder="Country" id="country" required>
+            <label for="country">Country:</label>
+            <select id="country" name="country" required>
+                <option value="<%= request.getParameter("countryCode") %>" selected disabled hidden>
+                        <%= request.getParameter("country") %>
+                        <%
+                        while(resultSet.next()) {
+                        String countryName = resultSet.getString("name");
+                        String countryCode = resultSet.getString("country_code");
+                    %>
+                <option value="<%=countryCode %>"><%=countryName %></option>
+                <%
+                    }
+                %>
+            </select>
+
+            <%--            <input value="<%= request.getParameter("country") %>" type="text" name="country" placeholder="Country" id="country" required>--%>
             <input type="submit" name="signup_submit" value="Edit the car" />
         </div>
         <div class="right">
             <h1></h1>
             <input value="<%= request.getParameter("color") %>" type="text" name="color" placeholder="Color" id="color" required>
+
         </div>
     </div>
 </form>

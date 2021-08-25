@@ -10,9 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +29,7 @@ public class CarsServlet extends HttpServlet {
             return;
         }
 
-        String query = "SELECT * FROM Cars";
+        String query = "SELECT * FROM Cars C INNER JOIN Country L ON C.country = L.country_code";
         List<String> parameters = new ArrayList<String>();
         QueryType queryType = QueryType.SELECT;
 
@@ -46,8 +44,9 @@ public class CarsServlet extends HttpServlet {
                 String model = resultSet.getString("model");
                 Integer year = resultSet.getInt("year");
                 String color = resultSet.getString("color");
-                String country = resultSet.getString("country");
-                Car car = new Car(id, brand, model, year, color, country);
+                String country = resultSet.getString("name"); //Country.name not Cars.country
+                String countryCode = resultSet.getString("country_code"); //Country.name not Cars.country
+                Car car = new Car(id, brand, model, year, color, country, countryCode);
                 carsList.add(car);
             }
             connection.close();
