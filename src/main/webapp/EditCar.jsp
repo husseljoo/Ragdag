@@ -61,7 +61,8 @@
         <div class="right">
             <h1></h1>
             <input value="<%= request.getParameter("color") %>" type="text" name="color" placeholder="Color" id="color" required>
-
+            <label for="upload_image">Upload image</label>
+            <input type="file" value="Upload image" name="upload_image" id="upload_image">
         </div>
     </div>
 </form>

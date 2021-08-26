@@ -15,22 +15,6 @@ INSERT INTO Users (first_name, last_name, username, email, password, role) VALUE
 INSERT INTO Users (first_name, last_name, username, email, password, role) VALUES ('Ahmed','Sabry', 'a', 'hamada@gmail.com', '1', 'emp');
 INSERT INTO Users (first_name, last_name, username, email, password, role) VALUES ('Ahmed','Sabry', 'b', 'hamada@gmail.com', 'lol', 'emp');
 
-
-CREATE TABLE Cars (
-   id int(11) AUTO_INCREMENT,
-   brand varchar(150) NOT NULL,
-   model varchar(150) NOT NULL,
-   year int(11) NOT NULL,
-   color varchar(150) NOT NULL,
-   country char(2) NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (country) REFERENCES Country(country_code) on DELETE CASCADE
-);
-
-INSERT INTO Cars (brand, model, year, color, country) VALUES ('Mercedes','C-Class', '2019', 'red', 'DE');
-INSERT INTO Cars (brand, model, year, color, country) VALUES ('Kia','Cerato', '2009', 'brown', 'DE');
-INSERT INTO Cars (brand, model, year, color, country) VALUES ('BMW','M5', '2020', 'black', 'DE');
-
 CREATE TABLE Country (
    country_code char(2) NOT NULL,
    name varchar(150) NOT NULL,
@@ -50,7 +34,17 @@ INSERT INTO Country (country_code, name) VALUES ('TR', 'Turkey');
 INSERT INTO Country (country_code, name) VALUES ('GB', 'United Kingdom');
 INSERT INTO Country (country_code, name) VALUES ('US', 'United States');
 
+CREATE TABLE Cars (
+   id int(11) AUTO_INCREMENT,
+   brand varchar(150) NOT NULL,
+   model varchar(150) NOT NULL,
+   year int(11) NOT NULL,
+   color varchar(150) NOT NULL,
+   country char(2) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (country) REFERENCES Country(country_code) on DELETE CASCADE
+);
 
-SELECT * FROM Cars C
-INNER JOIN Country L ON
-C.country = L.country_code;
+INSERT INTO Cars (brand, model, year, color, country) VALUES ('Mercedes','C-Class', '2019', 'red', 'DE');
+INSERT INTO Cars (brand, model, year, color, country) VALUES ('Kia','Cerato', '2009', 'brown', 'DE');
+INSERT INTO Cars (brand, model, year, color, country) VALUES ('BMW','M5', '2020', 'black', 'DE');
