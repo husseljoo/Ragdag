@@ -80,8 +80,8 @@
                     <input type="submit" value="Edit" name="remove">
                 </form>
             <td>
-                <form action="ViewCarServlet" method="post">
-                    <input type="hidden" name="details" value="<%= car.getId() %>" />
+                <form action="ViewCar.jsp" method="post">
+                    <input type="hidden" name="car_id" value="<%= car.getId() %>" />
                     <input type="hidden" name="brand" value="<%= car.getBrand() %>" href="CarDetails.jsp"/>
                     <input type="hidden" name="model" value="<%= car.getModel() %>" />
                     <input type="hidden" name="year" value="<%= car.getYear() %>" />

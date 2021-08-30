@@ -32,7 +32,7 @@
     ResultSet resultSet = queryProcessor.execute();
 %>
 
-<form action="EditCarServlet" method="post">
+<form action="EditCarServlet" method="post" enctype="multipart/form-data">
     <div id="login-box">
         <div class="left">
             <h3>Edit Car with id: <%= request.getParameter("edit_car") %> </h3>
@@ -42,8 +42,8 @@
             <input value="<%= request.getParameter("year") %>" type="text" name="year" placeholder="Year" id="year" required>
             <label for="country">Country:</label>
             <select id="country" name="country" required>
-                <option value="<%= request.getParameter("countryCode") %>" selected disabled hidden>
-                        <%= request.getParameter("country") %>
+                <option value="<%= request.getParameter("countryCode") %>">
+                    <%= request.getParameter("country") %> </option>
                         <%
                         while(resultSet.next()) {
                         String countryName = resultSet.getString("name");
@@ -62,7 +62,7 @@
             <h1></h1>
             <input value="<%= request.getParameter("color") %>" type="text" name="color" placeholder="Color" id="color" required>
             <label for="upload_image">Upload image</label>
-            <input type="file" value="Upload image" name="upload_image" id="upload_image">
+            <input type="file" accept=".jpg" value="Upload image" name="upload_image" id="upload_image">
         </div>
     </div>
 </form>

@@ -4,15 +4,20 @@ import Helpers.DatabaseConnection;
 import Helpers.QueryProcessor;
 import Helpers.QueryType;
 
+import javax.imageio.ImageIO;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.IOException;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@MultipartConfig
 @WebServlet(name = "EditCarServlet", value = "/EditCarServlet")
 public class EditCarServlet extends HttpServlet {
     @Override
@@ -23,11 +28,33 @@ public class EditCarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String carId = request.getParameter("edit_car");
         String brand = request.getParameter("brand");
         String model = request.getParameter("model");
         String year = request.getParameter("year");
         String color = request.getParameter("color");
         String country = request.getParameter("country");
+
+        Part imagePart = request.getPart("upload_image");
+        InputStream inputStream = imagePart.getInputStream();
+        BufferedImage bufferedImage = ImageIO.read(inputStream);
+        String basePath = "/home/husseljo/IdeaProjects/demo/Ragdag/src/main/webapp/images/";
+        File imageFile = new File(basePath+carId+".jpg");
+        Boolean bool = ImageIO.write(bufferedImage, "jpg", imageFile);
+
+        if(!bool)
+            System.out.println("Image write failed my G!");
+        else
+            System.out.println("The image write succeeded!");
+
+
+
+
+//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+//        Image  image = ImageIO.read(inputStream);
+//        String path =request.getContextPath()+"/images/";
+//        File file = new File(path);
+//        ImageIO.write((RenderedImage) image, "jpg", file);
 
         Connection connection = null;
 
@@ -37,8 +64,6 @@ public class EditCarServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        System.out.println("UPDATE Cars SET brand=?, model=?, year=?, color=?, country=? WHERE id=?");
-        System.out.println("the supposed id of the car is: " + request.getParameter("edit_car"));
         String query = "UPDATE Cars SET brand=?, model=?, year=?, color=?, country=? WHERE id=?";
         List<String> parameters = new ArrayList<String>();
         parameters.add(brand);

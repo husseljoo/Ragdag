@@ -43,15 +43,15 @@ public class LoginServlet extends HttpServlet {
         QueryProcessor queryProcessor = new QueryProcessor(connection, query, parameters, queryType);
         ResultSet resultSet = queryProcessor.execute();
 
-        Integer idVal = null;
-        String role = null;
-        String firstName = null;
+//        Integer idVal = null;
+//        String role = null;
+//        String firstName = null;
 
         try {
             resultSet.next();
-            idVal = resultSet.getInt("id");
-            role = resultSet.getString("role");
-            firstName = resultSet.getString("first_name");
+            Integer idVal = resultSet.getInt("id");
+            String role = resultSet.getString("role");
+            String firstName = resultSet.getString("first_name");
             System.out.println("The retrieved value from ResultSet is: " + idVal);
             connection.close();
 

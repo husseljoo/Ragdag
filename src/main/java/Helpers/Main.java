@@ -2,25 +2,29 @@ package Helpers;
 
 import Helpers.DatabaseConnection;
 
+import java.io.File;
+import java.lang.reflect.Constructor;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Main {
-    public static void main(String[] args){
-        try {
-            Connection con = DatabaseConnection.initializeDatabase();
+    public static void main(String[] args) throws NoSuchMethodException {
+//        Car car = new Car("12","hiefg",);
+        Class carClass= Car.class;
+        Constructor[] constList = carClass.getConstructors();
+//         carClass.getConstructors();
+        Constructor cons = carClass.getConstructors()[0];
+        System.out.println(cons);
 
-            Statement stmt=con.createStatement();
-            ResultSet rs=stmt.executeQuery("SELECT * FROM Users");
-            while(rs.next())
-                System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
+        String imagePath = "/home/husseljo/IdeaProjects/demo/Ragdag/src/main/webapp/images/8.jpg";
+        File tmpDir = new File(imagePath);
+        boolean fileExists = tmpDir.exists();
+        System.out.println("file exists"+fileExists);
 
-            rs.close();
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+//        for(Object cons: constList) {
+//            System.out.println(cons.toString());
+//        }
+//
     }
     }

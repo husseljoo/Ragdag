@@ -9,6 +9,7 @@ public class Car {
     String country;
     String countryCode;
 
+//    public Car(){}
     public Car(int id, String brand, String model, int year, String color, String country, String countryCode) {
         this.id = id;
         this.brand = brand;
@@ -17,6 +18,10 @@ public class Car {
         this.color = color;
         this.country = country;
         this.countryCode = countryCode;
+    }
+    public String[] getConstructorParams() {
+        return new String[]{"id", "brand", "model", "year", "color", "country", "countryCode"};
+
     }
     public String toString() {
         return "Id= " +this.id+ ", Brand= " +this.brand+ ", Model= " +this.model+ ", Year= " +this.year+ ", Color= " +this.color+ ", Country= " +this.country;
