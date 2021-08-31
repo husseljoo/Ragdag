@@ -1,5 +1,6 @@
 package com.example.ragdag;
 
+import Helpers.Config;
 import Helpers.DatabaseConnection;
 import Helpers.QueryProcessor;
 import Helpers.QueryType;
@@ -38,8 +39,8 @@ public class EditCarServlet extends HttpServlet {
         Part imagePart = request.getPart("upload_image");
         InputStream inputStream = imagePart.getInputStream();
         BufferedImage bufferedImage = ImageIO.read(inputStream);
-        String basePath = "/home/husseljo/IdeaProjects/demo/Ragdag/src/main/webapp/images/";
-        File imageFile = new File(basePath+carId+".jpg");
+        String imagePath = Config.IMAGE_PATH+"/"+carId+".jpg";
+        File imageFile = new File(imagePath);
         Boolean bool = ImageIO.write(bufferedImage, "jpg", imageFile);
 
         if(!bool)

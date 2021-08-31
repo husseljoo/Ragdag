@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.io.File"%>
+<%@ page import="Helpers.Config" %>
 <html>
 <head>
   <title>Car Details</title>
@@ -18,17 +19,10 @@
     <div> <%= request.getParameter("color") %> </div>
     <div> <%= request.getParameter("country") %> </div>
 
-<%
-      String imagePath = "/home/husseljo/IdeaProjects/demo/Ragdag/src/main/webapp/images/"+request.getParameter("car_id")+".jpg";
-      System.out.println(imagePath);
-      File tmpDir = new File(imagePath);
-      boolean fileExists = tmpDir.exists();
-%>
-    <% if (fileExists) { %>
-        <img src="<%=request.getContextPath()%>/images/<%=request.getParameter("car_id")%>.jpg" width="400" height="300">
-    <% } else { %>
-        <div>No image exists yet for this car!</div>
-    <% } %>
+
+    <img src="<%=request.getContextPath()%>/ImageServlet?carId=<%=request.getParameter("car_id")%>" width="400" height="300">
+
+
 
 </body>
 </html>

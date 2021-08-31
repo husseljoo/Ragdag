@@ -1,5 +1,6 @@
 package com.example.ragdag;
 
+import Helpers.Config;
 import Helpers.DatabaseConnection;
 import Helpers.QueryProcessor;
 import Helpers.QueryType;
@@ -25,6 +26,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password").trim();
         System.out.println("Language: "+request.getLocale().getLanguage());
         System.out.println("Language: "+request.getLocales());
+        Config.loadPropertiesFile();
 
         Connection connection = null;
         try {
